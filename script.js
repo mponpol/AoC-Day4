@@ -1052,3 +1052,40 @@ pid:147768826 ecl:blu byr:1922 hcl:#ceb3a1 cid:169
 ecl:blu byr:2002 eyr:2028 pid:998185490 cid:165 iyr:2020
 hgt:188cm hcl:#c0946f`
 
+const entriesArr = entries.split('\n\n');
+
+let passport = {
+    byr: 'byr',
+    iyr: 'iyr',
+    eyr: 'eyr',
+    hgt: 'Height',
+    hcl: ('Hair Color'),
+    ecl: ('Eye Color'),
+    pid: ('Passport ID'),
+    cid: ('Country ID')
+}
+
+const regExp1 = /cid/g;
+const regExp2 = /byr/g;
+const regExp3 = /iyr/g;
+const regExp4 = /eyr/g;
+const regExp5 = /hgt/g;
+const regExp6 = /hcl/g;
+const regExp7 = /ecl/g;
+const regExp8 = /pid/g;
+
+let counter = 0;
+
+for (i = 0; i < entriesArr.length ; i++) {
+    arr = entriesArr[i];
+    if (regExp1.test(arr) && regExp2.test(arr) && regExp3.test(arr)&& regExp4.test(arr) && regExp5.test(arr) && regExp6.test(arr) && regExp7.test(arr) && regExp8.test(arr)) {
+        counter ++;
+        console.log(arr);
+    }
+}
+
+console.log(counter);
+
+/* let passportMap = new Map(Object.entries(entries.split('\n\n')));
+
+let passportSet = new Set(entries.split('\n\n')); */
