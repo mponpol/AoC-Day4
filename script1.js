@@ -2,6 +2,7 @@ const ignorableField = "cid";
 const requiredFieldsList = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid", "cid"];
 
 const getPassportList = inputString => inputString.split(/\n\n/).map(item => item.replace("\n", " "));
+
 const checkPassportValidity = passport => {
     let isPassportValid = true;
     requiredFieldsList.forEach(reqField => {
