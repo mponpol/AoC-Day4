@@ -1,5 +1,5 @@
 /*
- * DAY 4
+ * DAY 4 (I)
  * 
  * The automatic passport scanners are slow because they're having trouble detecting
  * which passports have all required fields. The expected fields are as follows:
@@ -1052,32 +1052,210 @@ pid:147768826 ecl:blu byr:1922 hcl:#ceb3a1 cid:169
 ecl:blu byr:2002 eyr:2028 pid:998185490 cid:165 iyr:2020
 hgt:188cm hcl:#c0946f`
 
-// It works fine without the last map method, but now all entries are in one line
+// It works fine without the last map method, but now each entry is in one line
 const entriesArr = entries.split('\n\n').map(i => i.replace(/\n/g, ' '));
 
-let passport = {
-    iyr: /iyr/,
-    byr: /byr/,
-    eyr: /eyr/,
-    hgt: /hgt/,
-    hcl: /hcl/,
-    ecl: /ecl/,
-    pid: /pid/,
-    cid: /cid/
-}
+let passport = [/byr/, /iyr/, /eyr/, /hgt/, /hcl/, /ecl/, /pid/, /cid/];
 
-let counter = 0;
+let validPassports = [];
 
-for (i = 0; i < entriesArr.length ; i++) {
-    arr = entriesArr[i];
-    if (passport.byr.test(arr) && passport.iyr.test(arr) && passport.eyr.test(arr)&& passport.hgt.test(arr) && passport.hcl.test(arr) && passport.ecl.test(arr) && passport.pid.test(arr)) {
-        counter ++;
-        console.log(arr);
+for (i = 0; i < entriesArr.length; i++) {
+    let arr = entriesArr[i];
+    if (passport[0].test(arr) && passport[1].test(arr) && passport[2].test(arr)&& passport[3].test(arr) && passport[4].test(arr) && passport[5].test(arr) && passport[6].test(arr)) {
+        validPassports.push(arr);
     }
 }
 
-console.log(counter);
+console.log('There are ' + validPassports.length + ' valid passports');
 
-/* let passportMap = new Map(Object.entries(entries.split('\n\n')));
+/*
+ * DAY 4 (II)
+ *
+ * You can continue to ignore the cid field, but each other field has strict rules about
+ * what values are valid for automatic validation:
+ *  - byr (Birth Year) - four digits; at least 1920 and at most 2002.
+ *  - iyr (Issue Year) - four digits; at least 2010 and at most 2020.
+ *  - eyr (Expiration Year) - four digits; at least 2020 and at most 2030.
+ *  - hgt (Height) - a number followed by either cm or in:
+ *      -If cm, the number must be at least 150 and at most 193.
+ *      -If in, the number must be at least 59 and at most 76.
+ *  - hcl (Hair Color) - a # followed by exactly six characters 0-9 or a-f.
+ *  - ecl (Eye Color) - exactly one of: amb blu brn gry grn hzl oth.
+ *  - pid (Passport ID) - a nine-digit number, including leading zeroes.
+ *  - cid (Country ID) - ignored, missing or not.
+ * Your job is to count the passports where all required fields are both present and
+ * valid according to the above rules.
+ *
+ */
 
-let passportSet = new Set(entries.split('\n\n')); */
+console.log(validPassports);
+// "iyr:2015 hgt:59cm byr:2029 cid:219 pid:9381688753 eyr:1992 hcl:#b6652a ecl:#7a0fa6"
+
+/* for (i = 0; i < validPassports.length; i++) {
+    validPassports[i] = validPassports[i].split(' ');
+}
+console.log(validPassports); */
+
+/* let validPassportsArr = [];
+let tempObj = {};
+
+for (i = 0; i < validPassports.length; i++) {
+    for (j = 0; j < validPassports[i].length; j++) {
+        const key = validPassports[i][j].split(':')[0];
+        const value = validPassports[i][j].split(':')[1];
+        tempObj [key] = value;
+        validPassports[i][j] = tempObj;
+        tempObj = {};
+    }
+}
+console.log(validPassports); */
+/* [0 … 99]
+0: Array(8)
+0: {iyr: "2015"}
+1: {hgt: "59cm"}
+2: {byr: "2029"}
+3: {cid: "219"}
+4: {pid: "9381688753"}
+5: {eyr: "1992"}
+6: {hcl: "#b6652a"}
+7: {ecl: "#7a0fa6"}
+length: 8
+__proto__: Array(0) */
+
+/* let passportsCounter = 0;
+for (i = 0; i < validPassports.length; i++) {
+    for (j = 0; j < validPassports[i].length; j++) {
+    let byrStrict = validPassports[i][j].byr;
+    let iyrStrict = validPassports[i][j].iyr;
+    let eyrStrict = validPassports[i][j].eyr;
+    let hgtStrict = validPassports[i][j].hgt;
+    let hclStrict = validPassports[i][j].hcl;
+    let eclStrict = validPassports[i][j].ecl;
+    let pidStrict = validPassports[i][j].pid;
+    let xx = (/\#[0-9a-f]{6}/);
+
+    (parseInt(byrStrict) >= 1920 && parseInt(byrStrict) <= 2002) ? 1 : 0;
+    (parseInt(iyrStrict) >= 2010 && parseInt(iyrStrict) <= 2020) ? 1 : 0;
+    (parseInt(eyrStrict) >= 2020 && parseInt(eyrStrict) <= 2030) ? 1 : 0;
+    (hclStrict = xx) ? passportsCounter++ : 0;
+    }
+} */
+
+
+
+let validPassportsArr = [];
+
+for (i = 0; i < validPassports.length; i++) {
+    let arr = validPassports[i].split(' ');
+    validPassportsArr.push(arr);
+}
+console.log(validPassportsArr);             // BORRAR
+
+let algoPassports = [];
+
+for (i = 0; i < validPassportsArr.length; i++) {
+    for (j = 0; j < validPassportsArr[i].length; j++) {
+        let byrStrict = validPassportsArr[i][j].match(/(?<=byr:)\d{4}/);
+        if (parseInt(byrStrict) >= 1920 && parseInt(byrStrict) <= 2002) {
+            algoPassports.push(validPassportsArr[i]);     // 169
+            console.log(validPassportsArr[i][j]);
+        }
+    }
+}
+console.log(algoPassports);
+
+
+let algoPassports2 = [];
+
+for (i = 0; i < algoPassports.length; i++) {
+    for (j = 0; j < algoPassports[i].length; j++) {
+        let iyrStrict = algoPassports[i][j].match(/(?<=iyr:)\d{4}/);
+        if (parseInt(iyrStrict) >= 2010 && parseInt(iyrStrict) <= 2020) {
+            algoPassports2.push(algoPassports[i]);     // 153
+            console.log(algoPassports[i][j]);
+        }
+    }
+}
+console.log(algoPassports2);
+
+
+let algoPassports3 = [];
+
+for (i = 0; i < algoPassports2.length; i++) {
+    for (j = 0; j < algoPassports2[i].length; j++) {
+        let eyrStrict = algoPassports2[i][j].match(/(?<=eyr:)\d{4}/);
+        if (parseInt(eyrStrict) >= 2020 && parseInt(eyrStrict) <= 2030) {
+            algoPassports3.push(algoPassports2[i]);     // 146
+            console.log(algoPassports2[i][j]);
+        }
+    }
+}
+console.log(algoPassports3);
+
+
+let algoPassports4 = [];
+
+for (i = 0; i < algoPassports3.length; i++) {
+    for (j = 0; j < algoPassports3[i].length; j++) {
+        let hgtStrictCm = algoPassports3[i][j].match(/(?<=hgt:)(\d+)(?=cm)/);
+        if (parseInt(hgtStrictCm) >= 150 && parseInt(hgtStrictCm) <= 193) {
+            algoPassports4.push(algoPassports3[i]);      // 130
+            console.log(algoPassports3[i][j]);
+        }
+    }
+}
+
+for (i = 0; i < algoPassports3.length; i++) {
+    for (j = 0; j < algoPassports3[i].length; j++) {
+        let hgtStrictIn = algoPassports3[i][j].match(/(?<=hgt:)(\d+)(?=in)/);
+        if (parseInt(hgtStrictIn) >= 59 && parseInt(hgtStrictIn) <= 76) {
+            algoPassports4.push(algoPassports3[i]);      // 141
+            console.log(algoPassports3[i][j]);
+        }
+    }
+}
+console.log(algoPassports4);
+
+
+let algoPassports5 = [];
+
+for (i = 0; i < algoPassports4.length; i++) {
+    for (j = 0; j < algoPassports4[i].length; j++) {
+        let hclStrict = algoPassports4[i][j].match(/(?<=hcl:)#([0-9a-f]{6})/);
+        if (hclStrict !== null && hclStrict) {
+            algoPassports5.push(algoPassports4[i]);      // 138
+            console.log(algoPassports4[i][j]);
+        }
+    }
+}
+console.log(algoPassports5);
+
+
+let algoPassports6 = [];
+
+for (i = 0; i < algoPassports5.length; i++) {
+    for (j = 0; j < algoPassports5[i].length; j++) {
+        let eclStrict = algoPassports5[i][j].match(/(?<=ecl:)(amb|blu|brn|gry|grn|hzl|oth)/);
+        if (eclStrict) {
+            algoPassports6.push(algoPassports5[i]);      // 136
+            console.log(algoPassports5[i][j]);
+        }
+    }
+}
+console.log(algoPassports6);
+
+
+let algoPassports7 = [];
+
+for (i = 0; i < algoPassports6.length; i++) {
+    for (j = 0; j < algoPassports6[i].length; j++) {
+        let pidStrict = algoPassports6[i][j].match(/(?<=pid:)(\d{9}$)/);
+        if (pidStrict) {
+            algoPassports7.push(algoPassports6[i]);      // 131
+            console.log(algoPassports6[i][j]);
+        }
+    }
+}
+console.log(algoPassports7);
+
+console.log('There are ' + algoPassports7.length + ' valid passports');
