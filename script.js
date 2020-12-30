@@ -1088,60 +1088,6 @@ console.log('There are ' + validPassports.length + ' valid passports');
  *
  */
 
-console.log(validPassports);
-// "iyr:2015 hgt:59cm byr:2029 cid:219 pid:9381688753 eyr:1992 hcl:#b6652a ecl:#7a0fa6"
-
-/* for (i = 0; i < validPassports.length; i++) {
-    validPassports[i] = validPassports[i].split(' ');
-}
-console.log(validPassports); */
-
-/* let validPassportsArr = [];
-let tempObj = {};
-
-for (i = 0; i < validPassports.length; i++) {
-    for (j = 0; j < validPassports[i].length; j++) {
-        const key = validPassports[i][j].split(':')[0];
-        const value = validPassports[i][j].split(':')[1];
-        tempObj [key] = value;
-        validPassports[i][j] = tempObj;
-        tempObj = {};
-    }
-}
-console.log(validPassports); */
-/* [0 … 99]
-0: Array(8)
-0: {iyr: "2015"}
-1: {hgt: "59cm"}
-2: {byr: "2029"}
-3: {cid: "219"}
-4: {pid: "9381688753"}
-5: {eyr: "1992"}
-6: {hcl: "#b6652a"}
-7: {ecl: "#7a0fa6"}
-length: 8
-__proto__: Array(0) */
-
-/* let passportsCounter = 0;
-for (i = 0; i < validPassports.length; i++) {
-    for (j = 0; j < validPassports[i].length; j++) {
-    let byrStrict = validPassports[i][j].byr;
-    let iyrStrict = validPassports[i][j].iyr;
-    let eyrStrict = validPassports[i][j].eyr;
-    let hgtStrict = validPassports[i][j].hgt;
-    let hclStrict = validPassports[i][j].hcl;
-    let eclStrict = validPassports[i][j].ecl;
-    let pidStrict = validPassports[i][j].pid;
-    let xx = (/\#[0-9a-f]{6}/);
-
-    (parseInt(byrStrict) >= 1920 && parseInt(byrStrict) <= 2002) ? 1 : 0;
-    (parseInt(iyrStrict) >= 2010 && parseInt(iyrStrict) <= 2020) ? 1 : 0;
-    (parseInt(eyrStrict) >= 2020 && parseInt(eyrStrict) <= 2030) ? 1 : 0;
-    (hclStrict = xx) ? passportsCounter++ : 0;
-    }
-} */
-
-
 
 let validPassportsArr = [];
 
