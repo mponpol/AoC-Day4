@@ -1055,7 +1055,7 @@ hgt:188cm hcl:#c0946f`
 // It works fine without the last map method, but now each entry is in one line
 const entriesArr = entries.split('\n\n').map(i => i.replace(/\n/g, ' '));
 
-let passport = [/byr/, /iyr/, /eyr/, /hgt/, /hcl/, /ecl/, /pid/, /cid/];
+const passport = [/byr/, /iyr/, /eyr/, /hgt/, /hcl/, /ecl/, /pid/, /cid/];
 
 let validPassports = [];
 
@@ -1095,7 +1095,7 @@ for (i = 0; i < validPassports.length; i++) {
     let arr = validPassports[i].split(' ');
     validPassportsArr.push(arr);
 }
-console.log(validPassportsArr);             // BORRAR
+
 
 let algoPassports = [];
 
@@ -1103,12 +1103,10 @@ for (i = 0; i < validPassportsArr.length; i++) {
     for (j = 0; j < validPassportsArr[i].length; j++) {
         let byrStrict = validPassportsArr[i][j].match(/(?<=byr:)\d{4}/);
         if (parseInt(byrStrict) >= 1920 && parseInt(byrStrict) <= 2002) {
-            algoPassports.push(validPassportsArr[i]);     // 169
-            console.log(validPassportsArr[i][j]);
+            algoPassports.push(validPassportsArr[i]);
         }
     }
 }
-console.log(algoPassports);
 
 
 let algoPassports2 = [];
@@ -1117,12 +1115,10 @@ for (i = 0; i < algoPassports.length; i++) {
     for (j = 0; j < algoPassports[i].length; j++) {
         let iyrStrict = algoPassports[i][j].match(/(?<=iyr:)\d{4}/);
         if (parseInt(iyrStrict) >= 2010 && parseInt(iyrStrict) <= 2020) {
-            algoPassports2.push(algoPassports[i]);     // 153
-            console.log(algoPassports[i][j]);
+            algoPassports2.push(algoPassports[i]);
         }
     }
 }
-console.log(algoPassports2);
 
 
 let algoPassports3 = [];
@@ -1131,12 +1127,10 @@ for (i = 0; i < algoPassports2.length; i++) {
     for (j = 0; j < algoPassports2[i].length; j++) {
         let eyrStrict = algoPassports2[i][j].match(/(?<=eyr:)\d{4}/);
         if (parseInt(eyrStrict) >= 2020 && parseInt(eyrStrict) <= 2030) {
-            algoPassports3.push(algoPassports2[i]);     // 146
-            console.log(algoPassports2[i][j]);
+            algoPassports3.push(algoPassports2[i]);
         }
     }
 }
-console.log(algoPassports3);
 
 
 let algoPassports4 = [];
@@ -1145,8 +1139,7 @@ for (i = 0; i < algoPassports3.length; i++) {
     for (j = 0; j < algoPassports3[i].length; j++) {
         let hgtStrictCm = algoPassports3[i][j].match(/(?<=hgt:)(\d+)(?=cm)/);
         if (parseInt(hgtStrictCm) >= 150 && parseInt(hgtStrictCm) <= 193) {
-            algoPassports4.push(algoPassports3[i]);      // 130
-            console.log(algoPassports3[i][j]);
+            algoPassports4.push(algoPassports3[i]);
         }
     }
 }
@@ -1155,12 +1148,10 @@ for (i = 0; i < algoPassports3.length; i++) {
     for (j = 0; j < algoPassports3[i].length; j++) {
         let hgtStrictIn = algoPassports3[i][j].match(/(?<=hgt:)(\d+)(?=in)/);
         if (parseInt(hgtStrictIn) >= 59 && parseInt(hgtStrictIn) <= 76) {
-            algoPassports4.push(algoPassports3[i]);      // 141
-            console.log(algoPassports3[i][j]);
+            algoPassports4.push(algoPassports3[i]);
         }
     }
 }
-console.log(algoPassports4);
 
 
 let algoPassports5 = [];
@@ -1169,12 +1160,10 @@ for (i = 0; i < algoPassports4.length; i++) {
     for (j = 0; j < algoPassports4[i].length; j++) {
         let hclStrict = algoPassports4[i][j].match(/(?<=hcl:)#([0-9a-f]{6})/);
         if (hclStrict !== null && hclStrict) {
-            algoPassports5.push(algoPassports4[i]);      // 138
-            console.log(algoPassports4[i][j]);
+            algoPassports5.push(algoPassports4[i]);
         }
     }
 }
-console.log(algoPassports5);
 
 
 let algoPassports6 = [];
@@ -1182,13 +1171,12 @@ let algoPassports6 = [];
 for (i = 0; i < algoPassports5.length; i++) {
     for (j = 0; j < algoPassports5[i].length; j++) {
         let eclStrict = algoPassports5[i][j].match(/(?<=ecl:)(amb|blu|brn|gry|grn|hzl|oth)/);
+        // /(?<=ecl:)[(amb)(blu)(brn)(gry)(grn)(hzl)(oth)]/
         if (eclStrict) {
-            algoPassports6.push(algoPassports5[i]);      // 136
-            console.log(algoPassports5[i][j]);
+            algoPassports6.push(algoPassports5[i]);
         }
     }
 }
-console.log(algoPassports6);
 
 
 let algoPassports7 = [];
@@ -1196,12 +1184,11 @@ let algoPassports7 = [];
 for (i = 0; i < algoPassports6.length; i++) {
     for (j = 0; j < algoPassports6[i].length; j++) {
         let pidStrict = algoPassports6[i][j].match(/(?<=pid:)(\d{9}$)/);
+        // \d{9} would match ANY string that contains a nine-digit number (even ten-digit)
         if (pidStrict) {
-            algoPassports7.push(algoPassports6[i]);      // 131
-            console.log(algoPassports6[i][j]);
+            algoPassports7.push(algoPassports6[i]);
         }
     }
 }
-console.log(algoPassports7);
 
 console.log('There are ' + algoPassports7.length + ' valid passports');
