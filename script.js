@@ -1108,7 +1108,6 @@ for (i = 0; i < validPassportsArr.length; i++) {
     }
 }
 
-
 let algoPassports2 = [];
 
 for (i = 0; i < algoPassports.length; i++) {
@@ -1120,7 +1119,6 @@ for (i = 0; i < algoPassports.length; i++) {
     }
 }
 
-
 let algoPassports3 = [];
 
 for (i = 0; i < algoPassports2.length; i++) {
@@ -1131,7 +1129,6 @@ for (i = 0; i < algoPassports2.length; i++) {
         }
     }
 }
-
 
 let algoPassports4 = [];
 
@@ -1153,7 +1150,6 @@ for (i = 0; i < algoPassports3.length; i++) {
     }
 }
 
-
 let algoPassports5 = [];
 
 for (i = 0; i < algoPassports4.length; i++) {
@@ -1164,7 +1160,6 @@ for (i = 0; i < algoPassports4.length; i++) {
         }
     }
 }
-
 
 let algoPassports6 = [];
 
@@ -1177,7 +1172,6 @@ for (i = 0; i < algoPassports5.length; i++) {
         }
     }
 }
-
 
 let algoPassports7 = [];
 
